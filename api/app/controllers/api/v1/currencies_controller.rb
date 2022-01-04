@@ -1,14 +1,14 @@
 require 'net/http'
 
-class Api::V1::CurrenciesController< ApplicationController
-  before_action :set_currency, only: %i[ show update destroy ]
+class Api::V1::CurrenciesController < ApplicationController
+  before_action :set_currency, only: %i[show update destroy]
 
   # GET /currencies
   def index
-		page = !params[:page].nil? ? params[:page].to_i : 1
-		limit = !params[:limit].nil? ? params[:limit].to_i : 10
-		uri = URI("#{ENV['COIN_MARKET_URL'].to_s}/listings/latest?start=#{page}&limit=#{limit}")
-		res = Net::HTTP.get_response(uri, { 'X-CMC_PRO_API_KEY' => "#{ENV['COIN_MARKET_API_KEY'].to_s}" })
+    page = !params[:page].nil? ? params[:page].to_i : 1
+    limit = !params[:limit].nil? ? params[:limit].to_i : 10
+    uri = URI("#{ENV['COIN_MARKET_URL']}/listings/latest?start=#{page}&limit=#{limit}")
+    res = Net::HTTP.get_response(uri, { 'X-CMC_PRO_API_KEY' => (ENV['COIN_MARKET_API_KEY']).to_s })
 
     render json: res.body
   end
@@ -44,19 +44,20 @@ class Api::V1::CurrenciesController< ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_currency
-      @currency = Currency.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def currency_params
-      params.require(:currency).permit(:coin_name, :value, :page, :limit)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_currency
+    @currency = Currency.find(params[:id])
+  end
 
-		def get_crypto_meta(id)
-			uri = URI("#{ENV['COIN_MARKET_URL'].to_s}/info?id=#{id}")
-			res = Net::HTTP.get_response(uri, { 'X-CMC_PRO_API_KEY' => "#{ENV['COIN_MARKET_API_KEY'].to_s}" })
-			return res.body
-		end
+  # Only allow a list of trusted parameters through.
+  def currency_params
+    params.require(:currency).permit(:coin_name, :value, :page, :limit)
+  end
+
+  def get_crypto_meta(id)
+    uri = URI("#{ENV['COIN_MARKET_URL']}/info?id=#{id}")
+    res = Net::HTTP.get_response(uri, { 'X-CMC_PRO_API_KEY' => (ENV['COIN_MARKET_API_KEY']).to_s })
+    res.body
+  end
 end
