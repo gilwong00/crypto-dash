@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { Alert } from 'react-native';
 import { QueryClientProvider, QueryClient } from 'react-query';
-import { Tabs } from './navigation';
+import { Tabs } from './src/navigation/Tabs';
 
 const queryClient = new QueryClient({
   defaultOptions: {

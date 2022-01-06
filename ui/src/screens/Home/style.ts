@@ -65,5 +65,31 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: COLORS.white,
     marginRight: 12
+  },
+  coinContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+  coinImage: {
+    marginTop: 5,
+    width: 30,
+    height: 30
+  },
+  coinName: {
+    fontSize: 20
+  },
+  coinSymbol: {
+    color: '#6A6A6A',
+    fontSize: 16
+  },
+  coinValueContainer: {
+    marginTop: 12,
+    alignItems: 'center'
+  },
+  coinPrice: {
+    fontSize: 18
+  },
+  coinChange: {
+    fontSize: 16
   }
 });

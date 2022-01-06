@@ -5,15 +5,20 @@ import {
   TouchableOpacity,
   ScrollView,
   ImageBackground,
-  FlatList
+  FlatList,
+  ActivityIndicator,
+  Image
 } from 'react-native';
 import { styles } from './style';
 import { images } from '../../constants';
 import { Ionicons } from '@expo/vector-icons';
+import { useCoins } from '../../hooks';
+import { Coin } from '../../@types';
 
 interface HomeProps {}
 
 const Home: React.FC<HomeProps> = () => {
+  const { data: coins, error, isFetching } = useCoins();
   const renderItem = ({ item, index }: { item: any; index: number }) => {
     return (
       <TouchableOpacity
@@ -21,9 +26,41 @@ const Home: React.FC<HomeProps> = () => {
           ...styles.trendingItem,
           marginLeft: index === 0 ? 24 : 0
         }}
-      ></TouchableOpacity>
+      >
+        <View style={styles.coinContainer}>
+          <Image
+            source={{
+              uri: item.logo
+            }}
+            resizeMode='cover'
+            style={styles.coinImage}
+          />
+
+          <View style={{ marginLeft: 8 }}>
+            <Text style={styles.coinName}>{item.name}</Text>
+            <Text style={styles.coinSymbol}>{item.symbol}</Text>
+          </View>
+        </View>
+        <View style={styles.coinValueContainer}>
+          <Text style={styles.coinPrice}>
+            ${item.quote.USD.price.toFixed(4)}
+          </Text>
+          <Text
+            style={{
+              ...styles.coinChange,
+              color: item.quote.USD.percent_change_24h.toString().includes('-')
+                ? 'red'
+                : 'green'
+            }}
+          >
+            {item.quote.USD.percent_change_24h.toFixed(4)}%
+          </Text>
+        </View>
+      </TouchableOpacity>
     );
   };
+
+  if (isFetching) return <ActivityIndicator size={25} />;
 
   return (
     <ScrollView style={styles.container}>
@@ -63,9 +100,9 @@ const Home: React.FC<HomeProps> = () => {
             <Text style={styles.trendingHeader}>Trending</Text>
             <FlatList
               contentContainerStyle={{ marginTop: 8 }}
-              data={[]}
+              data={coins}
               renderItem={renderItem}
-              keyExtractor={(item: any) => `${item.id}`}
+              keyExtractor={(item: Coin) => `${item.id}`}
               horizontal={true}
               showsHorizontalScrollIndicator={false}
             />
