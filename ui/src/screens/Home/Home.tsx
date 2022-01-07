@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollView, ActivityIndicator } from 'react-native';
 import { styles } from './style';
 import { useCoins } from '../../hooks';
-import { HomeHeader, Notice } from '../../components';
+import { HomeHeader, Notice, TransactionHistory } from '../../components';
 
 const Home: React.FC = () => {
   const { data: coins, error, isFetching } = useCoins();
@@ -13,6 +13,7 @@ const Home: React.FC = () => {
     <ScrollView style={styles.container}>
       <HomeHeader coins={coins} />
       <Notice />
+      <TransactionHistory />
     </ScrollView>
   );
 };
