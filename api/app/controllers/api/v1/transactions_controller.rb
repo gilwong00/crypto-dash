@@ -1,5 +1,5 @@
 class Api::V1::TransactionsController < ApplicationController
-  before_action :set_transaction, only: %i[ show update destroy ]
+  before_action :set_transaction, only: %i[show update destroy]
 
   # GET /transactions
   def index
@@ -39,13 +39,14 @@ class Api::V1::TransactionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_transaction
-      @transaction = Transaction.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def transaction_params
-      params.require(:transaction).permit(:user_id, :coin_name, :transaction_type, :amount)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_transaction
+    @transaction = Transaction.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def transaction_params
+    params.require(:transaction).permit(:user_id, :coin_name, :transaction_type, :amount)
+  end
 end
