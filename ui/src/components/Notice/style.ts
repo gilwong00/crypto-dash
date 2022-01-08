@@ -7,8 +7,8 @@ export const styles = StyleSheet.create({
     marginHorizontal: 24,
     padding: 20,
     borderRadius: 12,
-    backgroundColor: '#5D2DFD',
-    shadowColor: '#000',
+    backgroundColor: COLORS.secondary,
+    shadowColor: COLORS.black,
     shadowOffset: {
       width: 0,
       height: 4
@@ -31,6 +31,6 @@ export const styles = StyleSheet.create({
   },
   learnMore: {
     textDecorationLine: 'underline',
-    color: '#37E39F'
+    color: COLORS.green
   }
 });

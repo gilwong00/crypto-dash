@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
     fontSize: 20
   },
   coinSymbol: {
-    color: '#6A6A6A',
+    color: COLORS.gray,
     fontSize: 16
   },
   coinValueContainer: {

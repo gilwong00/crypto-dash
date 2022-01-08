@@ -1,6 +1,8 @@
+import { COLORS } from '.';
+
 export const theme = {
   shadow: {
-    shadowColor: '#000',
+    shadowColor: COLORS.black,
     shadowOffset: {
       width: 0,
       height: 4

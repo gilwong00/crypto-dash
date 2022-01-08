@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
 import { Coin } from '../../@types';
 import { styles } from './style';
@@ -8,6 +9,8 @@ interface TrendingProps {
 }
 
 const Trending: React.FC<TrendingProps> = ({ coins }) => {
+  const navigation = useNavigation();
+
   const renderItem = ({ item, index }: { item: Coin; index: number }) => {
     return (
       <TouchableOpacity
@@ -15,6 +18,7 @@ const Trending: React.FC<TrendingProps> = ({ coins }) => {
           ...styles.trendingItem,
           marginLeft: index === 0 ? 24 : 0
         }}
+        onPress={() => navigation.navigate('Portfolio' as never)}
       >
         <View style={styles.coinContainer}>
           <Image
