@@ -3,7 +3,7 @@ import { COLORS } from '../../constants';
 
 export const styles = StyleSheet.create({
   noticeContainer: {
-    marginTop: 24,
+    marginTop: 70,
     marginHorizontal: 24,
     padding: 20,
     borderRadius: 12,

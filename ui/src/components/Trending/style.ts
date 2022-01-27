@@ -8,7 +8,9 @@ export const styles = StyleSheet.create({
   },
   trendingHeader: {
     color: COLORS.white,
-    fontSize: 16
+    fontSize: 16,
+    paddingLeft: 25,
+    fontWeight: '500'
   },
   trendingItem: {
     width: 180,

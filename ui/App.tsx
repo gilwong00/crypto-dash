@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { Alert } from 'react-native';
 import { QueryClientProvider, QueryClient } from 'react-query';
-import { Tabs } from './src/navigation/Tabs';
+import { Tabs, Auth } from './src/navigation';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -23,7 +23,8 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <NavigationContainer>
-        <Tabs />
+        {/* <Tabs /> */}
+        <Auth />
       </NavigationContainer>
     </QueryClientProvider>
   );
