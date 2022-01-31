@@ -1,4 +1,4 @@
-import { COLORS } from '.';
+import { COLORS } from './colors';
 
 export const theme = {
   shadow: {

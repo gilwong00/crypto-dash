@@ -1,3 +1,5 @@
+require 'bcrypt'
+
 class Api::V1::UsersController < ApplicationController
   before_action :set_user, only: %i[show update destroy]
 
@@ -16,12 +18,23 @@ class Api::V1::UsersController < ApplicationController
   # POST /users
   def create
     @user = User.new(user_params)
-		@user.password = params[:password]
+    @user.password = params[:password]
 
     if @user.save
+      # eventually we will store this in a rails session
+      # session[:user_id] = user.id
       render json: @user, status: :created
     else
       render json: @user.errors, status: :unprocessable_entity
+    end
+  end
+
+  def login
+    if BCrypt::Password.new(current_user.password_digest) == params[:password]
+      render json: { id: current_user.id, firstName: current_user.first_name, lastName: current_user.last_name, email: current_user.email },
+             status: :ok
+    else
+      render json: { message: 'Incorrect password or email' }, status: :unauthorized
     end
   end
 
@@ -39,9 +52,10 @@ class Api::V1::UsersController < ApplicationController
     @user.destroy
   end
 
-	def current_user
-		User.find_by_email!(params[:email])
-	end
+  def current_user
+		# read from session or cache
+    User.find_by_email!(params[:email])
+  end
 
   private
 

@@ -29,5 +29,21 @@ export const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 4,
     marginVertical: 15
+  },
+  loginHeader: {
+    textAlign: 'center',
+    fontSize: 20,
+    paddingBottom: 10
+  },
+  signupMessage: {
+    textAlign: 'center',
+    paddingTop: 10
+  },
+  signupCTA: {
+    textAlign: 'center',
+    color: COLORS.primary
+  },
+  errorText: {
+    color: COLORS.red
   }
 });
